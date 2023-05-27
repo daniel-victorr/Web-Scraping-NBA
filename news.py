@@ -17,12 +17,12 @@ class Scraping:
         self.create_file()
         self.close_Driver()
 
-    def browser_configuring(self):
+    def browser_configuring(self) -> None:
         self.option = Options()
         self.option.add_argument('-headless')
         self.driver = webdriver.Firefox(options=self.option)
 
-    def start(self):
+    def start(self) -> None:
         self.top10ranking = {}
         self.lisTranking = []
         self.rankings = {
@@ -44,7 +44,7 @@ class Scraping:
             cookie.click()   
             sleep(2) 
 
-    def field_scraping(self, type):
+    def field_scraping(self, type) -> dict:
         label = self.rankings[type]['label']
         
         # Parse HTML (Parsear o conteúdo HTML) - BeaultifulSoup
@@ -59,7 +59,7 @@ class Scraping:
         # Convert to Dict (Transformar os Dados em um Dicionário de dados próprio)
         return df.to_dict('records')
 
-    def pagination(self):   
+    def pagination(self) -> None:   
         btn_next = self.wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/div[2]/div[2]/div[3]/section[2]/div/div[2]/div[2]/div[1]/div[5]/button[2]')))    
                         
         while True:
@@ -71,13 +71,13 @@ class Scraping:
                 break
             btn_next.click()                     
 
-    def create_file(self):
+    def create_file(self) -> None:
         # Dump and Save to JSON file (Converter e salvar em um arquivo JSON)
         with open('ranking.json', 'w', encoding='utf-8') as jp:
             js = json.dumps(self.lisTranking, indent=4)
             jp.write(js)
    
-    def close_Driver(self):         
+    def close_Driver(self) -> None:         
         self.driver.quit()
 
 scraping_nbn = Scraping()
