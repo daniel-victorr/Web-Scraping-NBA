@@ -44,7 +44,7 @@ class Scraping:
             cookie.click()   
             sleep(2) 
 
-    def field_scraping(self, type) -> dict:
+    def field_scraping(self, type: str) -> dict:
         label = self.rankings[type]['label']
         
         # Parse HTML (Parsear o conteúdo HTML) - BeaultifulSoup
