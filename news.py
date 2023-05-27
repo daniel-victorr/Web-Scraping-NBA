@@ -80,4 +80,4 @@ class Scraping:
     def close_Driver(self):         
         self.driver.quit()
 
-scraping_nbn = Scraping()
+scraping_nba = Scraping()
